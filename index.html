@@ -35,11 +35,11 @@
     <script>
       const hideFullScreenButton = "true";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/V (3.1).loader.js";
+      const loaderUrl = buildUrl + "/V (3.2).loader.js";
       const config = {
-        dataUrl: buildUrl + "/V (3.1).data",
-        frameworkUrl: buildUrl + "/V (3.1).framework.js",
-        codeUrl: buildUrl + "/V (3.1).wasm",
+        dataUrl: buildUrl + "/V (3.2).data.unityweb",
+        frameworkUrl: buildUrl + "/V (3.2).framework.js.unityweb",
+        codeUrl: buildUrl + "/V (3.2).wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "gameStudio",
         productName: "Atrapa mi cheve",
@@ -131,36 +131,6 @@
 
           return params;
         }
-        function getResponse() 
-        {
-            const url = "https://mcstaging.tiendaselasturiano.com/rest/V1/customers/2";
-            const authorizationToken = "qiehk3e13r5kzbbvti0mf86wct45dik3";
-
-            fetch(url, {
-              method: 'GET',
-              headers: 
-              {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+authorizationToken
-              },
-              mode: 'no-cors' // No-CORS mode
-            }).then(function (response) 
-            {
-                // Fetch with no-cors won't allow access to the response content
-                if (response.ok) {
-                  return response.json(); // Won't work in no-cors mode
-                } else {
-                  console.error("Request failed: ", response.status);
-                }
-            }).then(function (jsonBody)
-            {
-                console.log("Response: ", jsonBody);
-            }).catch(function (error) 
-            {
-                console.error("Error: ", error);
-            });
-          }
-
     </script>
 </body>
 
