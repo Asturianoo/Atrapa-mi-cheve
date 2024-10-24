@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap">
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
+  <script src="OrientationHandler.js"></script>
 </head>
 
 <body class="dark">
@@ -34,37 +35,14 @@
     </div>
 
     <script>
-      function checkOrientation() {
-        if (window.innerHeight > window.innerWidth) {
-          // Portrait mode
-          alert("Please rotate your device to landscape mode.");
-          document.getElementById("unityContainer").style.display = "none";
-        } else {
-          // Landscape mode
-          document.getElementById("unityContainer").style.display = "block";
-        }
-      }
-      function goFullscreen() {
-        let element = document.getElementById("unityContainer");
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) { /* Safari */
-            element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) { /* IE11 */
-            element.msRequestFullscreen();
-        }
-    }
 
-     
-   
-      
       const hideFullScreenButton = "true";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/V (3.5).loader.js";
+      const loaderUrl = buildUrl + "/V (3.6).loader.js";
       const config = {
-        dataUrl: buildUrl + "/V (3.5).data.unityweb",
-        frameworkUrl: buildUrl + "/V (3.5).framework.js.unityweb",
-        codeUrl: buildUrl + "/V (3.5).wasm.unityweb",
+        dataUrl: buildUrl + "/V (3.6).data.unityweb",
+        frameworkUrl: buildUrl + "/V (3.6).framework.js.unityweb",
+        codeUrl: buildUrl + "/V (3.6).wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "gameStudio",
         productName: "Atrapa mi cheve",
@@ -125,12 +103,7 @@
               unityInstance.SetFullscreen(1);
             };
           }
-
-          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
-          {
-            console.log("loading full Screen");
-            unityInstance.SetFullscreen(1);
-          }
+          
         }).catch((message) => {
           alert(message);
         });
