@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+ <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Atrapa mi cheve</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap">
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
@@ -33,20 +34,37 @@
     </div>
 
     <script>
-    
-      window.addEventListener("orientationchange", function () {
-        if (window.orientation === 0 || window.orientation === 180) {
+      function checkOrientation() {
+        if (window.innerHeight > window.innerWidth) {
+          // Portrait mode
           alert("Please rotate your device to landscape mode.");
+          document.getElementById("unityContainer").style.display = "none";
+        } else {
+          // Landscape mode
+          document.getElementById("unityContainer").style.display = "block";
         }
-      });
+      }
+      function goFullscreen() {
+        let element = document.getElementById("unityContainer");
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) { /* Safari */
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) { /* IE11 */
+            element.msRequestFullscreen();
+        }
+    }
+
+     
+   
       
       const hideFullScreenButton = "true";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/V (3.4).loader.js";
+      const loaderUrl = buildUrl + "/V (3.5).loader.js";
       const config = {
-        dataUrl: buildUrl + "/V (3.4).data.unityweb",
-        frameworkUrl: buildUrl + "/V (3.4).framework.js.unityweb",
-        codeUrl: buildUrl + "/V (3.4).wasm.unityweb",
+        dataUrl: buildUrl + "/V (3.5).data.unityweb",
+        frameworkUrl: buildUrl + "/V (3.5).framework.js.unityweb",
+        codeUrl: buildUrl + "/V (3.5).wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "gameStudio",
         productName: "Atrapa mi cheve",
@@ -106,6 +124,12 @@
             fullscreenButton.onclick = () => {
               unityInstance.SetFullscreen(1);
             };
+          }
+
+          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
+          {
+            console.log("loading full Screen");
+            unityInstance.SetFullscreen(1);
           }
         }).catch((message) => {
           alert(message);
