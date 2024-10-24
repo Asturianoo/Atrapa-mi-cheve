@@ -27,19 +27,26 @@
       </div>
     </div>
     <div id="unity-fullscreen-button" style="display: none;"></div>
-    
+
     <div id="progress-container">
       <div id="progress-text">0%</div> <!-- This will display the progress text -->
     </div>
 
     <script>
+    
+      window.addEventListener("orientationchange", function () {
+        if (window.orientation === 0 || window.orientation === 180) {
+          alert("Please rotate your device to landscape mode.");
+        }
+      });
+      
       const hideFullScreenButton = "true";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/V (3.2).loader.js";
+      const loaderUrl = buildUrl + "/V (3.4).loader.js";
       const config = {
-        dataUrl: buildUrl + "/V (3.2).data.unityweb",
-        frameworkUrl: buildUrl + "/V (3.2).framework.js.unityweb",
-        codeUrl: buildUrl + "/V (3.2).wasm.unityweb",
+        dataUrl: buildUrl + "/V (3.4).data.unityweb",
+        frameworkUrl: buildUrl + "/V (3.4).framework.js.unityweb",
+        codeUrl: buildUrl + "/V (3.4).wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "gameStudio",
         productName: "Atrapa mi cheve",
@@ -85,12 +92,11 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
 
-         // Update progress text
-         const progressText = document.getElementById('progress-text');
-         progressText.textContent = `${Math.floor(100 * progress)}%`;
-        
-        }).then((unityInstance) => 
-        {
+          // Update progress text
+          const progressText = document.getElementById('progress-text');
+          progressText.textContent = `${Math.floor(100 * progress)}%`;
+
+        }).then((unityInstance) => {
           MyGameInstance = unityInstance;
           loadingCover.style.display = "none";
           if (canFullscreen) {
@@ -107,30 +113,26 @@
       };
       document.body.appendChild(script);
 
-        function getCurrentURL() {
-          return window.location.href;
-        }
 
-        function getUrlParameters() 
-        {
-          const url = getCurrentURL(); // Get the full URL
-          const params = {};
+      function getUrlParameters() {
+        const url = window.location.href; // Get the full URL
+        const params = {};
 
-          console.log("URL: ", url);
-          const queryString = url.split('?')[1]; // Extract the query string part (after the ?)
-          if (!queryString) return params; // Return empty object if there's no query string
+        console.log("URL: ", url);
+        const queryString = url.split('?')[1]; // Extract the query string part (after the ?)
+        if (!queryString) return params; // Return empty object if there's no query string
 
-          const urlParams = new URLSearchParams(queryString);
+        const urlParams = new URLSearchParams(queryString);
 
-          urlParams.forEach((value, key) => 
-          {
-            params[key] = value;
-            console.log("Key:", key, " Value:", value);
-            MyGameInstance.SendMessage('Manager-Api', 'OnReceivedUserID', value);
-          });
+        urlParams.forEach((value, key) => {
+          params[key] = value;
+          console.log("Key:", key, " Value:", value);
+          MyGameInstance.SendMessage('Manager-Api', 'OnReceivedUserID', value);
+        });
 
-          return params;
-        }
+        return params;
+      }
+
     </script>
 </body>
 
