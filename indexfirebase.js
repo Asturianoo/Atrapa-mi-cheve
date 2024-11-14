@@ -31,7 +31,7 @@ if (database === null || database === undefined) {
 function writeData(path, data) {
     const dbRef = database.ref(path);
     dbRef.set(data).then(() => {
-        //console.log("Js-leaderboard: Data saved successfully!");
+        console.log("Js-leaderboard: Data saved successfully!");
     }).catch((error) => {
         console.error("Js-leaderboard: Error saving data:", error);
     });
@@ -42,7 +42,7 @@ function readData(path, callback) {
     const dbRef = database.ref(path);
     dbRef.on('value', (snapshot) => {
         const data = snapshot.val();
-        //console.log("Js-leaderboard: Data read:");//, data);
+        console.log("Js-leaderboard: Data read:");//, data);
         if (callback) callback(data);
     });
 }
@@ -52,10 +52,10 @@ function checkPathExists(path, callback) {
     const dbRef = database.ref(path);
     dbRef.once('value').then((snapshot) => {
         if (snapshot.exists()) {
-            //console.log("Js-leaderboard: Path exists.");
+            console.log("Js-leaderboard: Path exists.");
             callback(true);
         } else {
-            //console.log("Js-leaderboard: Path does not exist.");
+            console.log("Js-leaderboard: Path does not exist.");
             callback(false);
         }
     }).catch((error) => {
@@ -68,7 +68,7 @@ function checkPathExists(path, callback) {
 function UploadLeaderboard(jsonData) 
 {
     let jsonLeaderboard = JSON.parse(jsonData);
-    //console.log("Js-leaderboard: Json value " );//+ jsonLeaderboard);
+    console.log("Js-leaderboard: Json value " );//+ jsonLeaderboard);
 
     var database = firebase.database();
     var path = "leaderboards";
@@ -78,7 +78,7 @@ function UploadLeaderboard(jsonData)
 // call by unity
 function GetLeaderboard() 
 {
-    //console.log("Js-leaderboard: getting data");
+    console.log("Js-leaderboard: getting data");
     checkPathExists('/leaderboards', (exists) => 
     {
         if (exists) 
