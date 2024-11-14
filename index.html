@@ -4,12 +4,20 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Atrapa mi cheve</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;600&display=swap">
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
+
+
+ <!-- Firebase App (the core Firebase SDK) -->
+ <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-database-compat.js"></script>
+ <!-- Include your custom JavaScript file -->
+ <script src="indexfirebase.js"></script>
+
 </head>
 
 <body class="dark">
@@ -33,15 +41,16 @@
       <div id="progress-text">0%</div> <!-- This will display the progress text -->
     </div>
 
+   
     <script>
 
       const hideFullScreenButton = "true";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/FindMe V(4.8).loader.js";
+      const loaderUrl = buildUrl + "/FindMe V(5.3).loader.js";
       const config = {
-        dataUrl: buildUrl + "/FindMe V(4.8).data.unityweb",
-        frameworkUrl: buildUrl + "/FindMe V(4.8).framework.js.unityweb",
-        codeUrl: buildUrl + "/FindMe V(4.8).wasm.unityweb",
+        dataUrl: buildUrl + "/FindMe V(5.3).data.unityweb",
+        frameworkUrl: buildUrl + "/FindMe V(5.3).framework.js.unityweb",
+        codeUrl: buildUrl + "/FindMe V(5.3).wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "gameStudio",
         productName: "Atrapa mi cheve",
@@ -93,6 +102,7 @@
 
         }).then((unityInstance) => {
           MyGameInstance = unityInstance;
+          Window.UnityGameInstance = unityInstance;
           loadingCover.style.display = "none";
           if (canFullscreen) {
             if (!hideFullScreenButton) {
@@ -102,7 +112,7 @@
               unityInstance.SetFullscreen(1);
             };
           }
-          
+
         }).catch((message) => {
           alert(message);
         });
@@ -114,7 +124,7 @@
         const url = window.location.href; // Get the full URL
         const params = {};
 
-        console.log("URL: ", url);
+        //console.log("URL: ", url);
         const queryString = url.split('?')[1]; // Extract the query string part (after the ?)
         if (!queryString) return params; // Return empty object if there's no query string
 
@@ -122,7 +132,7 @@
 
         urlParams.forEach((value, key) => {
           params[key] = value;
-          console.log("Key:", key, " Value:", value);
+          //console.log("Key:", key, " Value:", value);
           MyGameInstance.SendMessage('Manager-Api', 'OnReceivedUserID', value);
         });
 
