@@ -12,13 +12,13 @@
   <link rel="stylesheet" href="TemplateData/style.css">
 
 
- <!-- Firebase App (the core Firebase SDK) -->
- <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
- <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
- <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-database-compat.js"></script>
- <!-- Include your custom JavaScript file -->
- <script src="Javascript/indexfirebase.js"></script>
- <script src="Javascript/firebaseAuth.js"></script>
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-database-compat.js"></script>
+  <!-- Include your custom JavaScript file -->
+  <script src="Javascript/indexfirebase.js"></script>
+  <script src="Javascript/firebaseAuth.js"></script>
 
 </head>
 
@@ -43,16 +43,30 @@
       <div id="progress-text">0%</div> <!-- This will display the progress text -->
     </div>
 
-   
+
     <script>
+
+      (function () {
+        // Suppress all console logs
+        console.log = function () { };
+        console.warn = function () { };
+        console.error = function () { };
+        console.info = function () { };
+        console.debug = function () { };
+
+        // // Optional: Restore console behavior
+        // window.restoreConsole = function () {
+        //     console.log = console.warn = console.error = console.info = console.debug = originalConsoleLog;
+        // };
+      })();
 
       const hideFullScreenButton = "true";
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/FindMe V(5.8).loader.js";
+      const loaderUrl = buildUrl + "/FindMe V(6.2).loader.js";
       const config = {
-        dataUrl: buildUrl + "/FindMe V(5.8).data.unityweb",
-        frameworkUrl: buildUrl + "/FindMe V(5.8).framework.js.unityweb",
-        codeUrl: buildUrl + "/FindMe V(5.8).wasm.unityweb",
+        dataUrl: buildUrl + "/FindMe V(6.2).data.unityweb",
+        frameworkUrl: buildUrl + "/FindMe V(6.2).framework.js.unityweb",
+        codeUrl: buildUrl + "/FindMe V(6.2).wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "gameStudio",
         productName: "Atrapa mi cheve",
@@ -101,7 +115,6 @@
           // Update progress text
           const progressText = document.getElementById('progress-text');
           progressText.textContent = `${Math.floor(100 * progress)}%`;
-
         }).then((unityInstance) => {
           MyGameInstance = unityInstance;
           Window.UnityGameInstance = unityInstance;
@@ -141,11 +154,10 @@
         return params;
       }
 
-      function closeTab() 
-      {
-         // If the tab cannot be closed, redirect to the specified URL
-         window.location.href = "https://appmcstaging.tiendaselasturiano.com/game/";
-         //window.close();
+      function closeTab() {
+        // If the tab cannot be closed, redirect to the specified URL
+        window.location.href = "https://appmcstaging.tiendaselasturiano.com/game/";
+        //window.close();
       }
 
     </script>
